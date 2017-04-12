@@ -8,6 +8,7 @@ BEGIN {
   print "Content-type: text/plain\n\n";
 }
 
+my $pwd = `pwd`; chomp( $pwd );
 my $now = strftime( '%Y-%m-%d %H:%M:%S', localtime );
 print "$now\n";
 my $filename = 'time.txt';
@@ -17,7 +18,7 @@ close $fh;
 
 use Git;
 my $msg = "";
-my $repo = Git->repository(Directory => '/home/clients/5c22f8be857a437d2e2b874cc88568ba/web-transgenerationnel.ch/');
+my $repo = Git->repository( Directory => $pwd );
 # $msg = $repo->command( "status" );
 # print $msg;
 $msg = $repo->command( "pull" );
