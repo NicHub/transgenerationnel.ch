@@ -3,24 +3,18 @@
 use strict;
 use warnings;
 use POSIX       qw( strftime );
+use Git;
 
-BEGIN {
-  print "Content-type: text/plain\n\n";
-}
+print "Content-type: text/plain\n\n";
 
-my $pwd = `pwd`; chomp( $pwd );
+# Enregistre l’heure de la dernière synchronisation.
 my $now = strftime( '%Y-%m-%d %H:%M:%S', localtime );
 print "$now\n";
 my $filename = 'time.txt';
 open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
-print $fh $now;
 close $fh;
 
-use Git;
-my $msg = "";
+# Synchronisation.
+my $pwd = `pwd`; chomp( $pwd );
 my $repo = Git->repository( Directory => $pwd );
-# $msg = $repo->command( "status" );
-# print $msg;
-$msg = $repo->command( "pull" );
-print $msg;
-print "END\n"
+my $msg = $repo->command( "pull" );
