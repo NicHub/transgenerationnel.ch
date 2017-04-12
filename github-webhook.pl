@@ -5,7 +5,9 @@ use warnings;
 use POSIX       qw( strftime );
 use Git;
 
-print "Content-type: text/plain\n\n";
+BEGIN {
+	print "Content-type: text/plain\n\n";
+}
 
 # Enregistre l’heure de la dernière synchronisation.
 my $now = strftime( '%Y-%m-%d %H:%M:%S', localtime );
