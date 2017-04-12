@@ -9,7 +9,7 @@ function main()
 {
     if( isset( $_POST[ 'payload' ] ) )
     {
-        // writeDateToJsonFile();
+        writeDateToJsonFile();
         gitPull();
     }
 }
