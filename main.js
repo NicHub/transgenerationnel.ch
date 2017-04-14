@@ -12,7 +12,7 @@ $( document ).ready( function() {
     // On ne fait la requête que si p#last-update existe sur la page
     if( last_update.length > 0 )
     {
-      $.getJSON( "http://osonsnousreveler.com/github-webhook-log.json", function( data ) {
+      $.getJSON( "/github-webhook-log.json", function( data ) {
         last_update.html( "Dernière mise à jour<br/>" + data.github_webhook_last_pull_time );
       });
     }
