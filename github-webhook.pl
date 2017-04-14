@@ -8,9 +8,10 @@ use Git;
 print "Content-type: text/plain\n\n";
 
 # Enregistre l’heure de la dernière synchronisation dans un fichier texte.
-my $now = strftime( '%Y-%m-%d %H:%M:%S', localtime );
-my $filename = 'time.txt';
+my $now = strftime( '{"github_webhook_last_pull_time":"%Y-%m-%d %H:%M:%S"}', localtime );
+my $filename = 'github-webhook-log.json';
 open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
+print $fh $now;
 close $fh;
 
 # Synchronisation du dépôt Git.
