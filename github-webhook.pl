@@ -18,3 +18,19 @@ close $fh;
 my $pwd = `pwd`; chomp( $pwd );
 my $repo = Git->repository( Directory => $pwd );
 my $msg = $repo->command( "pull" );
+
+
+use CGI qw();
+my $c = CGI->new;
+my gitHubHook = $c->header('text/plain');
+if( 'POST' eq $c->request_method && $c->param( 'dl' ) )
+{
+    my ans = 'YES\n';
+} else {
+    my ans = 'NO\n';
+}
+my $filename = 'github-ans.log';
+open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
+print $fh $gitHubHook;
+print $fh $ans;
+close $fh;
