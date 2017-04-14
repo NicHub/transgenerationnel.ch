@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-use warnings;
+# use warnings;
 use POSIX       qw( strftime );
 use Git;
 
@@ -19,18 +19,19 @@ my $pwd = `pwd`; chomp( $pwd );
 my $repo = Git->repository( Directory => $pwd );
 my $msg = $repo->command( "pull" );
 
-
+# Test si POST présent
 use CGI qw();
 my $c = CGI->new;
-my gitHubHook = $c->header('text/plain');
-if( 'POST' eq $c->request_method && $c->param( 'dl' ) )
+my $gitHubHook = $c->header('text/plain');
+my $ans = '';
+if( $c->request_method eq 'POST' && $c->param( 'payload' ) )
 {
-    my ans = 'YES\n';
+	$ans = "YES\n";
 } else {
-    my ans = 'NO\n';
+    $ans = "NO\n";
 }
 my $filename = 'github-ans.log';
 open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
-print $fh $gitHubHook;
 print $fh $ans;
+print $fh $gitHubHook;
 close $fh;
