@@ -32,4 +32,3 @@ close $fh;
 my $pwd = `pwd`; chomp( $pwd );
 my $repo = Git->repository( Directory => $pwd );
 my $msg = $repo->command( "pull" );
-
