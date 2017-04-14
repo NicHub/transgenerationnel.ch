@@ -24,11 +24,11 @@ use CGI qw();
 my $c = CGI->new;
 my $gitHubHook = $c->header('text/plain');
 my $ans = '';
-if( $c->request_method eq 'POST' && $c->param( 'payload' ) )
+if( !($c->request_method eq 'POST' && $c->param( 'payload' )) )
 {
-	$ans = "YES\n";
-} else {
     $ans = "NO\n";
+} else {
+	$ans = "YES\n";
 }
 my $filename = 'github-ans.log';
 open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
