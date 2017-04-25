@@ -12,8 +12,8 @@ my $now = strftime( '{"github_webhook_last_pull_time":"%Y-%m-%d %H:%M:%S"}', loc
 # On quitte si le POST est absent
 use CGI qw();
 my $c = CGI->new;
-my $gitHubHook = $c->header('text/plain');
-if( !($c->request_method eq 'POST' && $c->param( 'payload' )) )
+my $gitHubHook = $c->header( 'text/plain' );
+if( !( $c->request_method eq 'POST' && $c->param( 'payload' ) ) )
 {
   my $filename = 'error.log';
   open( my $fh, '>', $filename ) or die "Could not open file '$filename' $!";
